@@ -1,6 +1,7 @@
 let workingValue;
 let totalValue;
 let operator;
+let resetDisplay = false;
 
 function add(a,b) {
     return parseInt(a) + parseInt(b);
@@ -37,34 +38,84 @@ numberButtons.addEventListener('click', (e) => {
 
     switch(target.id) {
         case "zero":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "0";
+            workingValue = equation.textContent;
             break;
         case "one":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "1";
+            workingValue = equation.textContent;
             break;
         case "two":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "2";
+            workingValue = equation.textContent;
             break;
         case "three":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "3";
+            workingValue = equation.textContent;
             break;
         case "four":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "4";
+            workingValue = equation.textContent;
             break;
         case "five":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "5";
+            workingValue = equation.textContent;
             break;
         case "six":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "6";
+            workingValue = equation.textContent;
             break;
         case "seven":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "7";
+            workingValue = equation.textContent;
             break;
         case "eight":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "8";
+            workingValue = equation.textContent;
             break;
         case "nine":
+            if (resetDisplay == true) {
+                equation.textContent = "";
+                resetDisplay == false;
+            }
             equation.textContent += "9";
+            workingValue = equation.textContent;
             break;
         case "clear":
             clear();
@@ -78,32 +129,58 @@ operatorButtons.addEventListener('click', (e) => {
 
     switch(target.id) {
         case "plus":
+            if (totalValue === "" && operator === "") {
+                totalValue = workingValue;
+                workingValue = "";
+            }
             operator = "+";
+            resetDisplay = true;
             break;
         case "minus":
+            if (totalValue === "" && operator === "") {
+                totalValue = workingValue; 
+                workingValue = "";
+            }
             operator = "-";
+            resetDisplay = true;
             break;
         case "divide":
+            if (totalValue === "" && operator === "") {
+                totalValue = workingValue;
+                workingValue = "";
+            }
             operator = "/";
+            resetDisplay = true;
             break;
         case "multiply":
+            if (totalValue === "" && operator === "") {
+                totalValue = workingValue;
+                workingValue = "";
+            }
             operator = "*";
+            resetDisplay = true;
             break;
         case "equals":
             switch (operator) {
                 case "+":
-                    workingValue = add(workingValue,tempValue);
+                    totalValue = add(totalValue,workingValue);
+                    equation.textContent = totalValue;
+                    workingValue = "";
                     break;
                 case "-":
-                    workingValue = subtract(workingValue,tempValue);
+                    totalValue = subtract(totalValue,workingValue);
+                    equation.textContent = totalValue;
+                    workingValue = "";
                     break;
                 case "/":
-                    workingValue = divide(workingValue,tempValue);
-                    
+                    totalValue = divide(totalValue,workingValue);
+                    equation.textContent = totalValue;
+                    workingValue = "";
                     break;
                 case "*":
-                    workingValue = multiply(workingValue,tempValue);
-                    
+                    totalValue = multiply(totalValue,workingValue);
+                    equation.textContent = totalValue;
+                    workingValue = "";
                     break;
                 default:
                     break;
