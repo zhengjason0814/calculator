@@ -20,7 +20,39 @@ function multiply(a,b) {
 }
 
 function operate() {
-    console.log(equation);
+    if (workingValue === "" || totalValue === "") {
+        return;
+    }
+    switch (operator) {
+        case "+":
+            totalValue = add(totalValue,workingValue);
+            equation.textContent = totalValue;
+            workingValue = "";
+            break;
+        case "-":
+            totalValue = subtract(totalValue,workingValue);
+            equation.textContent = totalValue;
+            workingValue = "";
+            break;
+        case "/":
+            if (workingValue == "0" || totalValue == "0") {
+                clear();
+                equation.textContent = "Divide by 0 Error";
+                resetDisplay = true;
+                return;
+            }
+            totalValue = divide(totalValue,workingValue);
+            equation.textContent = totalValue;
+            workingValue = "";
+            break;
+        case "*":
+            totalValue = multiply(totalValue,workingValue);
+            equation.textContent = totalValue;
+            workingValue = "";
+            break;
+        default:
+            break;
+    }
 }
 
 function clear() {
@@ -28,6 +60,7 @@ function clear() {
     workingValue = "";
     operator = "";
     totalValue = "";
+    resetDisplay = false;
 }
 
 equation = document.querySelector(".calculation-text");
@@ -38,73 +71,73 @@ numberButtons.addEventListener('click', (e) => {
 
     switch(target.id) {
         case "zero":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "0";
-            workingValue = equation.textContent;
+            workingValue = equation.textContent;    
             break;
         case "one":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "1";
             workingValue = equation.textContent;
             break;
         case "two":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "2";
             workingValue = equation.textContent;
             break;
         case "three":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "3";
             workingValue = equation.textContent;
             break;
         case "four":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "4";
             workingValue = equation.textContent;
             break;
         case "five":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "5";
             workingValue = equation.textContent;
             break;
         case "six":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "6";
             workingValue = equation.textContent;
             break;
         case "seven":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "7";
             workingValue = equation.textContent;
             break;
         case "eight":
-            if (resetDisplay == true) {
+            if (resetDisplay === true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "8";
             workingValue = equation.textContent;
@@ -132,59 +165,41 @@ operatorButtons.addEventListener('click', (e) => {
             if (totalValue === "" && operator === "") {
                 totalValue = workingValue;
                 workingValue = "";
+            } else if (operator !== "") {
+                operate();
             }
             operator = "+";
-            resetDisplay = true;
             break;
         case "minus":
             if (totalValue === "" && operator === "") {
                 totalValue = workingValue; 
                 workingValue = "";
+            } else if (operator !== "") {
+                operate();
             }
             operator = "-";
-            resetDisplay = true;
             break;
         case "divide":
             if (totalValue === "" && operator === "") {
                 totalValue = workingValue;
                 workingValue = "";
+            } else if (operator !== "") {
+                operate();
             }
             operator = "/";
-            resetDisplay = true;
             break;
         case "multiply":
             if (totalValue === "" && operator === "") {
                 totalValue = workingValue;
                 workingValue = "";
+            } else if (operator !== "") {
+                operate();
             }
             operator = "*";
-            resetDisplay = true;
             break;
         case "equals":
-            switch (operator) {
-                case "+":
-                    totalValue = add(totalValue,workingValue);
-                    equation.textContent = totalValue;
-                    workingValue = "";
-                    break;
-                case "-":
-                    totalValue = subtract(totalValue,workingValue);
-                    equation.textContent = totalValue;
-                    workingValue = "";
-                    break;
-                case "/":
-                    totalValue = divide(totalValue,workingValue);
-                    equation.textContent = totalValue;
-                    workingValue = "";
-                    break;
-                case "*":
-                    totalValue = multiply(totalValue,workingValue);
-                    equation.textContent = totalValue;
-                    workingValue = "";
-                    break;
-                default:
-                    break;
-            }
+            operate();
             break;
     }
+    resetDisplay = true;
 });
