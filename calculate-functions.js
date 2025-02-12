@@ -145,7 +145,7 @@ numberButtons.addEventListener('click', (e) => {
         case "nine":
             if (resetDisplay == true) {
                 equation.textContent = "";
-                resetDisplay == false;
+                resetDisplay = false;
             }
             equation.textContent += "9";
             workingValue = equation.textContent;
@@ -193,7 +193,7 @@ operatorButtons.addEventListener('click', (e) => {
                 totalValue = workingValue;
                 workingValue = "";
             } else if (operator !== "") {
-                operate();
+                operate(); 
             }
             operator = "*";
             break;
